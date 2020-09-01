@@ -1,4 +1,13 @@
+/*
+idea:dp[l][r] is the maximum anser to  make the elements in range l and r disaper
+first we pich and number l<i<l so that its the last  element to disaper in this range 
+ex: 1,2,3,4   l=1 r=n if we chose 3 to be the last element then we have to solve for 3,4 and 123 separtly and add a[l]*a[r]
 
+
+
+
+
+*/
 #include<bits/stdc++.h>
 using namespace std;
 typedef long long ll;
