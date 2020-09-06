@@ -1,67 +1,75 @@
-/* Author : fadi gamal (handle : fadi57MohamedAhmed04)
-   contest name USACO 2019 December Contest, Silver
-   problem name :Milk Visits
-   problem link : http://usaco.org/index.php?page=viewproblem2&cpid=968
-   problem solution :
-   	same idea : 
-   	https:http://usaco.org/current/data/sol_milkvisits_silver_dec19.html
+*/
+by :fadi gamal
+link:https://acm.timus.ru/problem.aspx?space=1&num=1930
+
+idea is to use dikjstra from the start node and the cost we keep track of out direction 
+every time we change direction costs 1 if dont need to change it its cost nothing
+so in the priorty queue we keep track of {cost{node,direction}};
+complexity O(ELogV))
+
+
+
+
 */
 
-
-
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-ll n,m;string s;
-const int mx=1e5+9;
-ll comp[mx];
-int visited[mx];
-vector<int>v[mx];
-char cc[mx];
-ll num=1;
-void dfs(int ii){
-    if(visited[ii]){return;}
-    visited[ii]=1;
-    for(auto i:v[ii]){
-        if(s[ii-1]==s[i-1]){
-            comp[i]=num;
-            dfs(i);
-        }else{
-             //comp[i]=comp[ii]+1;
-            
-        }
-    }
+ ll n,m,c,s,e;
+ const int mx=1000000;
+vector<pair<int,int>>v[100000];
+ll d[mx];
+ll vis[1000000];
+
+void dikj(){
+    
+    priority_queue<pair<int,pair<int,int>>>q;
+  q.push({0,{s,1}});  q.push({0,{s,-1}});
+  d[s]=0;
+  while(q.size()){
+      pair<int,pair<int,int>>me=q.top();
+      q.pop();
+      int node=me.second.first;
+      int dir=me.second.second;
+      int distt=me.first*-1;
+      vis[node]=1;
+      
+      for(auto i:v[node]){
+          if(!vis[i.first]&&(distt+((i.second)!=dir))<d[i.first]){
+              
+              d[i.first]=distt+((i.second)!=dir);
+              q.push({-1*d[i.first],{i.first,i.second}});
+          }
+      }
+  }
+    
+    
+    
 }
 int main() {
-     freopen("milkvisits.in" , "r" , stdin) ;
-    freopen("milkvisits.out" , "w" , stdout) ;
- cin>>n>>m>>s;
- for(int i=0;i<n-1;i++){
-     int x,y;cin>>x>>y;
-    v[x].push_back(y); 
-    v[y].push_back(x);
- }
- //dfs(1);
-  for(int i=1;i<=n;i++){
-      if(comp[i]==0){
-      comp[i]=num;
-   dfs(i);num++;}
+   /* freopen("mooyomooyo.in" , "r" , stdin) ;
+    freopen("mooyomooyo.out" , "w" , stdout) ;*/
     
- }
+  cin>>n>>m;int x,y;
+  for(int i=1;i<=m;i++){
+      
+      cin>>x>>y;
+      v[x].push_back({y,1});
+      v[y].push_back({x,-1});
+      
+      d[x]=10000000;
+      d[y]=10000000;
+      
+  }cin>>s>>e;
  
- //cout<<comp[1]<<comp[3];
- //return 0;
-  for(int i=0;i<m;i++){
-     int x,y;char t;
-     //cout<<9;
-     cin>>x>>y>>t;
-    
-     if(comp[x]==comp[y]){
-         if(s[x-1]==t){cout<<'1';}else{cout<<0;}
-     }else{
-             cout<<1;
-         }
-    
- }
   
+  dikj();
+  /* for(auto i:v[2]){
+          cout<<i.first<<" "<<i.second<<" ";
+      }*/
+  cout<<d[e];
+  
+  
+ 
+
 }
