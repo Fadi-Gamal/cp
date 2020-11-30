@@ -1,4 +1,4 @@
-/* Author : fadi gamal (handle : fadi57MohamedAhmed04)
+/* Author : fadi gamal (handle : fadi57)
    contest name USACO 2019 December Contest, Silver
    problem name :Milk Visits
    problem link : http://usaco.org/index.php?page=viewproblem2&cpid=968
