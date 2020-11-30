@@ -5,7 +5,7 @@ for every i we calculate the best from dp[i]=max of
 dp[j-1]+(max element from i->j)*(i-j+1)
 for every j in range i and i-k
 
-/*
+*/
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
