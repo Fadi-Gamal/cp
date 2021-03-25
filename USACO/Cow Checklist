@@ -1,0 +1,82 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+const ll mx=5e6+10;
+const int mod= 1e9+7 ;
+const ll inf=1e18;
+
+
+
+//***while there is life there is hope
+int n,m,k,q;
+
+//int a[mx];
+
+ll sum(ll x,ll y){
+return (x+y)%mod;
+
+
+ }
+  pair<int,int>v[mx];
+pair<int,int>vv[mx];
+ ll dist(pair<int,int>p,pair<int,int>p2){
+
+   return (abs(p.first-p2.first)*abs(p.first-p2.first))+(abs(p.second-p2.second)*abs(p.second-p2.second));
+
+ }
+
+ll dp[1005][1005][2];
+ll h,g;
+ll solve(int i,int j,int last){
+if(i==h&&j==g&&last==0){return 0;}else if(i==h&&j==g){return inf;}
+ll &ret=dp[i][j][last];
+
+if(ret!=-1){return ret;}
+ret=inf;
+if(i<h){
+int x=0;
+if(last==0){x=dist(v[i],v[i+1]);
+}else{
+    x=dist(v[i+1],vv[j]);
+    }
+    ret=solve(i+1,j,0)+x;
+}
+if(j<g){
+     int x=0;
+    if(last==0){x=dist(v[i],vv[j+1]);}else{x=dist(vv[j+1],vv[j]);}
+    ret=min(ret,solve(i,j+1,1)+x);
+}
+
+return ret;
+
+
+
+
+ }
+int main() {
+       freopen("checklist.in" , "r" , stdin) ;
+    freopen("checklist.out" , "w" , stdout) ;
+cin>>h>>g;
+ for(int i=1;i<=h;i++){
+    int x,y;cin>>x>>y;
+    v[i]={x,y};
+ }for(int i=1;i<=g;i++){
+    int x,y;cin>>x>>y;
+    vv[i]={x,y};
+ }
+
+memset(dp,-1,sizeof(dp));
+
+//cout<<dp[1000][1000][0];
+cout<<solve(1,0,0);
+
+}
+
+
+
+
+
+
+
+
