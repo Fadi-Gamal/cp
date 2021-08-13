@@ -1,4 +1,4 @@
-/* Author : fadi gamal (handle : fadi57MohamedAhmed04)
+/* Author : fadi gamal (handle : fadi57)
    contest name : Baltic olympiad in informatics 2011
    problem name : Treasures and Vikings
    problem link : https://cses.fi/100/list/
